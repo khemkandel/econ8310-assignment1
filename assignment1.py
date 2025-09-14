@@ -42,7 +42,8 @@ pred['trend'] = pred['trend'].astype(float)   # or .astype(int)
 
 # Reorder columns
 pred = pred[['year', 'month', 'day', 'hour', 'trend']]
-pred = pred[['trend']]
+pred = pred['trend']
+pred = pred.to_numpy().ravel()
 
 
 # Create plots of forecast and truth, 
