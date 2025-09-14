@@ -30,8 +30,19 @@ forecast
 
 
 pred = forecast[forecast['ds'] > modelFit.history['ds'].max()][['ds','trend']]
-pred['trend'] = pred['trend'].astype(int)
-pred
+
+# Extract datetime components
+pred['year'] = pred['ds'].dt.year.astype(int)
+pred['month'] = pred['ds'].dt.month.astype(int)
+pred['day'] = pred['ds'].dt.day.astype(int)
+pred['hour'] = pred['ds'].dt.hour.astype(int)
+
+# Ensure trend is float (or int if you prefer)
+pred['trend'] = pred['trend'].astype(float)   # or .astype(int)
+
+# Reorder columns
+pred = pred[['year', 'month', 'day', 'hour', 'trend']]
+pred = pred[['trend']]
 
 
 # Create plots of forecast and truth, 
