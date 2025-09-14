@@ -24,12 +24,18 @@ modelFit = model.fit(data)
 # Create timeline for 1 year in future, 
 #   then generate predictions based on that timeline
 
-future = modelFit.make_future_dataframe(periods=365)
-pred = modelFit.predict(future)
+future = modelFit.make_future_dataframe(periods=31*24,freq='H')
+forecast = modelFit.predict(future)
+forecast
+
+
+pred = forecast[forecast['ds'] > modelFit.history['ds'].max()][['ds','trend']]
+pred['trend'] = pred['trend'].astype(int)
+pred
 
 
 # Create plots of forecast and truth, 
 #   as well as component breakdowns of the trends
-plt = modelFit.plot(pred)
+plt = modelFit.plot(forecast)
 plt.savefig("prophet.png")
-comp = modelFit.plot_components(pred)
+comp = modelFit.plot_components(forecast)
