@@ -25,7 +25,7 @@ modelFit = model.fit(data)
 #   then generate predictions based on that timeline
 
 future = modelFit.make_future_dataframe(periods=365)
-forecast = modelFit.predict(future)
+pred = modelFit.predict(future)
 
 
 # Create plots of forecast and truth, 
