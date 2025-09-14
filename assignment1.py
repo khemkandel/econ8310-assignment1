@@ -29,7 +29,7 @@ forecast = modelFit.predict(future)
 forecast
 
 
-pred = forecast[forecast['ds'] > modelFit.history['ds'].max()][['ds','trend']]
+pred = forecast[forecast['ds'] > modelFit.history['ds'].max()][['ds','yhat']]
 
 # Extract datetime components
 pred['year'] = pred['ds'].dt.year.astype(int)
@@ -38,11 +38,11 @@ pred['day'] = pred['ds'].dt.day.astype(int)
 pred['hour'] = pred['ds'].dt.hour.astype(int)
 
 # Ensure trend is float (or int if you prefer)
-pred['trend'] = pred['trend'].astype(float)   # or .astype(int)
+pred['yhat'] = pred['yhat'].astype(float)   # or .astype(int)
 
 # Reorder columns
-pred = pred[['year', 'month', 'day', 'hour', 'trend']]
-pred = pred['trend']
+pred = pred[['year', 'month', 'day', 'hour', 'yhat']]
+pred = pred['yhat']
 pred = pred.to_numpy().ravel()
 
 
