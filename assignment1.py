@@ -30,6 +30,6 @@ pred = modelFit.predict(future)
 
 # Create plots of forecast and truth, 
 #   as well as component breakdowns of the trends
-plt = modelFit.plot(forecast)
+plt = modelFit.plot(pred)
 plt.savefig("prophet.png")
-comp = modelFit.plot_components(forecast)
+comp = modelFit.plot_components(pred)
